@@ -1,0 +1,29 @@
+name: PSG QA CI
+
+on:
+  pull_request:
+    branches: ['*']
+  push:
+    branches: ['develop']
+    tags: ["v*"]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.PAT_READ_PACKAGES_TO_ENABLE_MAVEN_DOWNLOAD }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: '11.0.8'
+
+      - name: Compile
+        run: sbt compile
+        
+      - name: Test
+        run: sbt test
