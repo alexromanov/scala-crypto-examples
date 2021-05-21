@@ -1,4 +1,4 @@
-name: PSG QA CI
+name: scala-crypto-examples CI
 
 on:
   pull_request:
